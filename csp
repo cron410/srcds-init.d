@@ -55,7 +55,6 @@ service_start() {
 			echo "Tried to start but $TITLE was already running!"
 		else
 			echo "$TITLE was not running... starting."
-			cd $STEAM
 			as_user "cd $STEAM && $INTERFACE $STEAM/$DAEMON $OPTS"
 			sleep 7
 			if ps ax | grep -v grep | grep -v -i SCREEN | grep $NAME > /dev/null
