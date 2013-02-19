@@ -1,0 +1,125 @@
+#!/bin/sh
+# Source Dedicated Server Init Script
+# /etc/init.d/****
+# set perms to 755
+# Derived from script here: http://blog.bigdinosaur.org/serving-minecraft-on-ubuntu/
+# and here: http://forums.srcds.com/viewtopic/5835
+# reddit.com/u/dicknuckle
+
+  ### BEGIN INIT INFO
+  # Provides:   srcds
+  # Required-Start: $local_fs $remote_fs
+  # Required-Stop:  $local_fs $remote_fs
+  # Should-Start:   $network
+  # Should-Stop:    $network
+  # Default-Start:  2 3 4 5
+  # Default-Stop:   0 1 6
+  # Short-Description:    Minecraft server
+  # Description:    Starts the minecraft server
+  ### END INIT INFO
+
+## Server options 
+TITLE='CS:Promod'  			# Script initialization title
+NAME='csp'						# Server handle for the screen session
+DAEMON='srcds_run'				# The server daemon
+STEAM='~/sourceds/orangebox'	# STEAM to Steam installation
+USERNAME='freeman'
+
+## Game options
+#IP=''							# IP of the server
+PORT='27015'					# Port number to
+MAP='ctf_2fort'					# Initial map to start
+GAME='tf'						# Game type (tf|cstrike|valve|hl2mp)
+PLAYERS='24'					# Maximum number of players
+INTERFACE='screen -dmS $NAME'
+
+## Server options string
+# OPTS="-game $GAME +hostname \"$CLIENT\" +map $MAP +ip $IP -port $PORT \
+#    -autoupdate +maxplayers $PLAYERS -pidfile $STEAM/$GAME/$NAME.pid"
+
+OPTS="-game $GAME +map $MAP -port $PORT -autoupdate +maxplayers $PLAYERS"
+
+ME=`whoami`
+as_user() {
+	if [ "$ME" == "$USERNAME" ] ; then
+		bash -c "$1"
+	else
+		su - $USERNAME -c "$1"
+	fi
+}
+
+service_start() {
+	# Check if the pid files currently exist
+	if ps ax | grep -v grep | grep -v -i SCREEN | grep $NAME > /dev/null
+		then
+			echo "Tried to start but $TITLE was already running!"
+		else
+			echo "$TITLE was not running... starting."
+			cd $STEAM
+			as_user "cd $STEAM && $INTERFACE $STEAM/$DAEMON $OPTS"
+			sleep 7
+			if ps ax | grep -v grep | grep -v -i SCREEN | grep $NAME > /dev/null
+				then
+					echo "$TITLE is now running."
+				else
+					echo "Could not start $TITLE."
+			fi
+	fi
+}
+
+service_stop() {
+if ps ax | grep -v grep | grep -v -i SCREEN | grep $NAME > /dev/null
+	then
+		echo "Stopping $TITLE"
+		# Get the process ID from the pid file we created earlier
+		screen -S $NAME -X quit
+		sleep 3
+	else
+		echo "$TITLE, is not running."
+		#exit 1
+fi
+sleep 3
+if ps ax | grep -v grep | grep -v -i SCREEN | grep $NAME > /dev/null
+	then 
+		echo "ERROR: $TITLE cannot be stopped."
+	else
+		echo "$TITLE stopped."
+fi
+}
+
+service_status() {
+if ps ax | grep -v grep | grep -v -i SCREEN | grep $NAME > /dev/null
+	then
+		echo "$TITLE is running."
+	else
+		echo "$TITLE is not running."
+fi
+}
+
+# start, stop, restart et. all
+case "$1" in
+	'start')
+		service_start
+	;;
+	'stop')
+		service_stop
+	;;
+	'restart')
+		service_stop
+		sleep 1
+		service_start
+	;;
+	'status')
+		service_status
+	;;
+	'update')
+		service_update
+	;;
+*)
+	
+	echo "Usage $0 start|stop|restart|status|update"
+	exit 1
+	;;
+esac
+
+exit 0
