@@ -18,19 +18,19 @@
   ### END INIT INFO
 
 ## Server options
-TITLE='CS:Promod'                               # Script initialization title
-NAME='csp'                                      # Server handle for the screen session
-DAEMON='./srcds_run'                            # The server daemon
-STEAM='/home/freeman/sourceds/orangebox'        # STEAM to Steam installation
+TITLE='CS:Promod'                               # Human-readable name. anything you want.
+NAME='csp'            ## MUST BE UNIQUE! ##     # Session name for 'screen' wrapper. 
+DAEMON='./srcds_run'                            # The server daemon or executable.
+STEAM='/home/freeman/sourceds/orangebox'        # Steam installation
 USERNAME='freeman'
 
 ## Game options
 IP='freedomfighters.servegame.com'         	# IP of the server
 PORT='27015'                               	# Port number
 MAP='csp_aztec'                           	# Initial map to start
-GAME='cspromod'                         	# Game type (tf|cstrike|valve|hl2mp|cspromod)
-PLAYERS='16'                       	# Maximum number of players
-INTERFACE='screen -dmS'			# Wrapper for game instance
+GAME='cspromod'                             # Game type (tf|cstrike|valve|hl2mp|cspromod)
+PLAYERS='16'                       	        # Maximum number of players
+INTERFACE='screen -dmS'			                # Wrapper for server instance
 
 ## Server options string
 # OPTS="-game $GAME +hostname \"$CLIENT\" +map $MAP +ip $IP -port $PORT \
