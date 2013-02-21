@@ -50,14 +50,14 @@ as_user() {
 }
 
 service_start() {
-  if pgrep -f $GAME > /dev/null
+  if pgrep -f $NAME > /dev/null
   then
     echo "$TITLE is already running!"
   else
     echo "Starting $TITLE..."
     as_user "cd $STEAM && $INTERFACE $NAME $DAEMON $OPTS"
     sleep 7
-    if pgrep -f $GAME > /dev/null
+    if pgrep -f $NAME > /dev/null
         then
           echo "OK"
         else
@@ -67,12 +67,12 @@ fi
 }
 
 service_stop() {
-if pgrep -f $GAME > /dev/null
+if pgrep -f $NAME > /dev/null
   then
     echo "Stopping $TITLE..."
     screen -S $NAME -X quit
     sleep 3
-    if pgrep -f $GAME > /dev/null
+    if pgrep -f $NAME > /dev/null
       then
         echo "ERROR: $TITLE was not stopped."
       else
@@ -84,7 +84,7 @@ fi
 }
 
 service_status() {
-if pgrep -f $GAME > /dev/null
+if pgrep -f $NAME > /dev/null
         then
                 echo "$TITLE is running."
         else
