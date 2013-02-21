@@ -22,7 +22,8 @@ TITLE='CS:Promod'                               # Human-readable name. anything 
 NAME='csp'            ## MUST BE UNIQUE! ##     # Session name for 'screen' wrapper. 
 DAEMON='./srcds_run'                            # The server daemon or executable.
 STEAM='/home/freeman/sourceds/orangebox'        # Steam installation
-USERNAME='freeman'
+USERNAME='freeman'                              # Linux username to run under.
+STEAMBIN='/home/freeman/sourceds'               # Steam binary file. (include the actual file in this path?)
 
 ## Game options
 IP='freedomfighters.servegame.com'         	# IP of the server
@@ -34,9 +35,9 @@ INTERFACE='screen -dmS'			                # Wrapper for server instance
 
 ## Server options string
 # OPTS="-game $GAME +hostname \"$CLIENT\" +map $MAP +ip $IP -port $PORT \
-#    -autoupdate +maxplayers $PLAYERS -pidfile $STEAM/$GAME/$NAME.pid"
+#    -autoupdate +maxplayers $PLAYERS
 
-OPTS="-game $GAME +map $MAP +ip $IP -port $PORT -autoupdate +maxplayers $PLAYERS"
+OPTS="-game $GAME +map $MAP -port $PORT +maxplayers $PLAYERS -autoupdate -steambin $STEAMBIN"
 
 ME=`whoami`
 as_user() {
