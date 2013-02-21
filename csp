@@ -24,6 +24,7 @@ DAEMON='./srcds_run'                            # The server daemon or executabl
 STEAM='/home/freeman/sourceds/orangebox'        # Steam installation
 USERNAME='freeman'                              # Linux username to run under.
 STEAMBIN='/home/freeman/sourceds'               # Steam binary file. (include the actual file in this path?)
+CFG='server.cfg'                               # specify server.cfg for multiple servers of the same game in the same dir.
 
 ## Game options
 IP='freedomfighters.servegame.com'         	# IP of the server
@@ -37,7 +38,7 @@ INTERFACE='screen -dmS'			                # Wrapper for server instance
 # OPTS="-game $GAME +hostname \"$CLIENT\" +map $MAP +ip $IP -port $PORT \
 #    -autoupdate +maxplayers $PLAYERS
 
-OPTS="-game $GAME +map $MAP -port $PORT +maxplayers $PLAYERS -autoupdate -steambin $STEAMBIN"
+OPTS="-game $GAME +map $MAP -port $PORT +maxplayers $PLAYERS -autoupdate -steambin $STEAMBIN +exec $CFG"
 
 ME=`whoami`
 as_user() {
