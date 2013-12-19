@@ -17,22 +17,23 @@
   # Description:    Starts the Source Dedicated Server
   ### END INIT INFO
 
-## Server options
-TITLE='CS:Promod'                               # Human-readable name. anything you want.
-NAME='csp'            ## MUST BE UNIQUE! ##     # Session name for 'screen' wrapper. 
-DAEMON='./srcds_run'                            # The server daemon or executable.
-STEAM='/home/freeman/sourceds/orangebox'        # Steam installation
-USERNAME='freeman'                              # Linux username to run under.
-STEAMBIN='/home/freeman/sourceds'               # Steam binary file. (include the actual file in this path?)
-CFG='server.cfg'                               # specify server.cfg for multiple servers of the same game in the same dir.
-
 ## Game options
-IP='freedomfighters.servegame.com'         	# IP of the server
-PORT='27015'                               	# Port number
-MAP='csp_aztec'                           	# Initial map to start
-GAME='cspromod'                             # Game type (tf|cstrike|valve|hl2mp|cspromod)
-PLAYERS='16'                       	        # Maximum number of players
-INTERFACE='screen -dmS'			                # Wrapper for server instance
+IP="freedomfighters.servegame.com"         	# IP of the server
+PORT="27015"                               	# Port number
+MAP="csp_aztec"                           	# Initial map to start
+GAME="cspromod"                             # Game type (tf|cstrike|valve|hl2mp|cspromod)
+PLAYERS="24"                       	        # Maximum number of players
+INTERFACE="screen -dmS"			            # Wrapper for server instance
+
+## Server options
+TITLE="CS:Promod"                           # Human-readable name. anything you want.
+USERNAME="css"                              # Linux username to run under.
+NAME="$USERNAME-$PORT" ## MUST BE UNIQUE!   # Session name for "screen" wrapper. 
+DAEMON="./srcds_run"                        # The server daemon or executable.
+STEAM="/home/$USER/sourceds/orangebox"      # Steam installation
+STEAMBIN="/home/$USER/sourceds"             # Steam binary file. (include the actual file in this path?)
+CFG="server.cfg"                            # specify server.cfg for multiple servers of the same game in the same dir.
+
 
 ## Server options string
 # OPTS="-game $GAME +hostname \"$CLIENT\" +map $MAP +ip $IP -port $PORT \
