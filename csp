@@ -18,12 +18,12 @@
   ### END INIT INFO
 
 ## Game options
-IP="freedomfighters.servegame.com"         	# IP of the server
+IP="game.domain.com"         	              # IP or DNS name of the server
 PORT="27015"                               	# Port number
 MAP="csp_aztec"                           	# Initial map to start
 GAME="cspromod"                             # Game type (tf|cstrike|valve|hl2mp|cspromod)
 PLAYERS="24"                       	        # Maximum number of players
-INTERFACE="screen -dmS"			            # Wrapper for server instance
+INSTANCE="screen -dmS"			                # Wrapper for server instance
 
 ## Server options
 TITLE="CS:Promod"                           # Human-readable name. anything you want.
@@ -56,7 +56,7 @@ service_start() {
     echo "$TITLE is already running!"
   else
     echo "Starting $TITLE..."
-    as_user "cd $STEAM && $INTERFACE $NAME $DAEMON $OPTS"
+    as_user "cd $STEAM && $INSTANCE $NAME $DAEMON $OPTS"
     sleep 7
     if pgrep -f $NAME > /dev/null
         then
