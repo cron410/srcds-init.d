@@ -18,12 +18,12 @@
   ### END INIT INFO
 
 ## Game options
-IP="game.domain.com"         	              # IP or DNS name of the server
+IP="game.domain.com"				# IP or DNS name of the server
 PORT="27015"                               	# Port number
 MAP="csp_aztec"                           	# Initial map to start
 GAME="cspromod"                             # Game type (tf|cstrike|valve|hl2mp|cspromod)
 PLAYERS="24"                       	        # Maximum number of players
-INSTANCE="screen -dmS"			                # Wrapper for server instance
+INSTANCE="screen -dmS"				# Wrapper for server instance
 
 ## Server options
 TITLE="CS:Promod"                           # Human-readable name. anything you want.
